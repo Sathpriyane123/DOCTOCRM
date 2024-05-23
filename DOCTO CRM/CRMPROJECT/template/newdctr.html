@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>New Doctor Form</title>
+</head>
+<style>
+    .button{
+        position: relative;
+        padding-top: 50px;
+        
+    }
+    .btn2{
+        background-color: green;
+        color: #fff;
+        border: 0;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-left: 10px;
+        cursor: pointer;
+        width: 80px;
+        height: 40px;
+
+
+    }  
+    .btn1 {
+        background-color: #bdbaba;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-left: 30px;
+        cursor: pointer;
+        width: 80px;
+        height: 40px;
+
+    }    
+    button:hover{
+        box-shadow: 0 0 5px black;
+    }
+    #main{
+        background-color: #bbbcbb;
+        padding: 20px;
+    }     
+           
+   
+
+</style>
+<script>
+    
+        function addPhoneInput() {
+            var phoneContainer = document.getElementById('phone-container');
+            var phoneInputs = document.querySelectorAll('[name^="phone[]"]');
+            
+            // Check if there are less than 4 phone input boxes
+            if (phoneInputs.length < 4) {
+                var newPhoneInput = document.createElement("div");
+                newPhoneInput.className = "input-group mt-2";
+                newPhoneInput.innerHTML = `
+                    <input type="text" class="form-control" name="phone[]" placeholder="Enter phone number">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="removePhoneInput(this)">-</button>
+                    </div>`;
+                
+                phoneContainer.appendChild(newPhoneInput);
+            }
+        }
+
+        function removePhoneInput(button) {
+            var phoneContainer = document.getElementById('phone-container');
+            phoneContainer.removeChild(button.parentNode.parentNode);
+        }
+    
+</script>
+<body>
+    <form action="newdctr" method="POST">
+        {% csrf_token %}
+    <div class=" text-white p-3 d-flex justify-content-between align-items-center" id="main">
+        <h2 class="m-0" style="color: green;">New Doctor</h2>
+        <a href="{% url 'search' %}"><button class="btn btn-lg">x</button></a>
+    </div>
+    <div class="mb-5"></div>
+
+    <div class="container">
+        <form>
+            <div class="form-row">
+                <!-- Column 1 -->
+                <div class="form-group col-md-4">
+                    <label for="title">Title</label>
+                    <select class="form-control" id="title" name="title">
+                        <option value="Dr">Dr</option>
+                        <option value="Mr">Mr</option>
+                        <!-- Add other options here -->
+                    </select>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="form-group col-md-4">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" >
+                </div>
+
+                <!-- Column 3 -->
+                <div class="form-group col-md-4" id="phone-container">
+                    <label for="phone">Phone</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="phone" name="phone1" placeholder="Enter phone number" >
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="addPhoneInput()">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional rows for other form elements -->
+            <!-- ... -->
+            <div class="form-row">
+                <!-- Column 1 -->
+                <div class="form-group col-md-4">
+                    <label for="clinic">Clinic Name</label>
+                    <input type="text" class="form-control" id="clinic" name="clinic1" placeholder="Enter clinic name">
+                </div>
+
+                <!-- Column 2 -->
+                <div class="form-group col-md-4">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                </div>
+
+                   <!-- Column 3 -->
+                   <div class="form-group col-md-4">
+                    <label for="specification">specification</label>
+                    <select class="form-control" id="state" name="specification">
+                        <option value="">-Select Specialisaton-</option>
+                        <option value="GENERAL PHYSICIAN">GENERAL PHYSICIAN</option>
+                        <option value="GYNECOLOGIST">GYNECOLOGIST</option>
+                        <option value="PEDIATRICIAN">PEDIATRICIAN</option>
+                        <option value="OPTHALMOLOGIST">OPTHALMOLOGIST</option>
+                        <option value="DERMATOLOGIST">DERMATOLOGIST</option>
+                        <option value="ENT DOCTOR">ENT DOCTOR</option>
+                        <option value="ORTHOPEDIC">ORTHOPEDIC</option>
+                        <option value="CARDIOLOGIST">CARDIOLOGIST</option>
+                        <option value="NEUROLOGIST">NEUROLOGIST</option>
+                        <option value="DENTAL">DENTAL</option>
+                        <option value="UROLOGIST">UROLOGIST</option>
+                        <option value="PSYCHIATRIST">PSYCHIATRIST</option>
+                        <option value="PATHOLOGIST">PATHOLOGIST</option>
+                        <option value="RADIOLOGIST">RADIOLOGIST</option>
+                        <!-- Add other options here -->
+                    </select>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="form-group col-md-4">
+                    <label for="state">State</label>
+                    <select class="form-control" id="state" name="state">
+                        <option value=""> </option>
+                        <option value="andhraPradesh">Andhra Pradesh</option>
+                        <option value="arunachalPradesh">Arunachal Pradesh</option>
+                        <option value="assam">Assam</option>
+                        <option value="bihar">Bihar</option>
+                        <option value="chhattisgarh">Chhattisgarh</option>
+                        <option value="goa">Goa</option>
+                        <option value="gujarat">Gujarat</option>
+                        <option value="haryana">Haryana</option>
+                        <option value="himachalPradesh">Himachal Pradesh</option>
+                        <option value="jammuKashmir">Jammu and Kashmir</option>
+                        <option value="jharkhand">Jharkhand</option>
+                        <option value="karnataka">Karnataka</option>
+                        <option value="kerala">Kerala</option>
+                        <option value="madhyaPradesh">Madhya Pradesh</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="manipur">Manipur</option>
+                        <option value="meghalaya">Meghalaya</option>
+                        <option value="mizoram">Mizoram</option>
+                        <option value="nagaland">Nagaland</option>
+                        <option value="odisha">Odisha</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="rajasthan">Rajasthan</option>
+                        <option value="sikkim">Sikkim</option>
+                        <option value="tamilNadu">Tamil Nadu</option>
+                        <option value="telangana">Telangana</option>
+                        <option value="tripura">Tripura</option>
+                        <option value="uttarPradesh">Uttar Pradesh</option>
+                        <option value="uttarakhand">Uttarakhand</option>
+                        <option value="westBengal">West Bengal</option>
+                        <!-- Add other options here -->
+                    </select>
+                </div>
+              
+                 <!-- Column 3 -->
+                 <div class="form-group col-md-4">
+                    <label for="state">city</label>
+                    <input type="text" class="form-control" id="city" name="city">
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="status">Call Status</label>
+                    <select class="form-control" id="status" name="status">
+                        <option></option>
+                        <option value="Interested">Interested</option>
+                        <option value="Not Interested">Not Interested</option>
+                        <option value="Ringing Not Responce">Ringing Not Responce</option>
+                        <option value="Call Late">Call Late</option>
+                        
+                        <!-- Add other options here -->
+                    </select>
+                </div>
+             
+                <div class="button">
+                    <button class="btn1">Cancel</button><button class="btn2">Save</button>
+
+                </div>
+            </div>
+        </form>   
+</body>
+</html>

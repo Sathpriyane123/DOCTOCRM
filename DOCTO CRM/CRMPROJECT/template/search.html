@@ -1,0 +1,248 @@
+{% extends "head.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search doctors</title>
+    <link rel="shortcut icon" id="favicon" href="http://doctoscrm.in/uploads/company/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+
+        .head{
+            height: 30px;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            font-family: 'Times New Roman', Times, serif;
+            padding-inline: 5px;
+            
+        }
+        .header{
+            background-color: #44569c;
+            height: 63px;
+        }
+        .container{
+            height: 250px;
+            width: 100%;
+            padding: auto;
+        }
+        .mb-3{
+            width: 300px;
+            margin-left: 20px;
+            margin-left: 20px;
+            float: left;
+        }
+        #sp{
+            float: left;
+            margin-top: 58px;
+        }
+        #sts{
+            margin-top: 42px;
+
+        }
+        #btns{
+            margin-top: 170px;
+            margin-left: -250px;
+        }
+        #btn{
+            background-color: green;
+            color: #fff;
+            border: 0;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            margin-left: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #btn:hover{
+            background-color:  #b3b1b1;
+            box-shadow: 0 0 5px black;
+            color: black;
+        }
+        
+         input{
+            width: 130px;
+            height: 40px;
+        }
+        .tb{
+            position: relative;
+            padding-inline: 20px;
+        }
+        td a{
+            color: #2a6fba;
+
+        }
+        td a:hover{
+            color: #0e1c82;
+
+        }
+    </style>
+</head>
+<body>
+
+
+        <div class="btn">
+            <a href="{% url 'newdoctor' %}"><input type="submit" value="New doctor" id="btn"></a>
+            <a href="{% url 'newproduct' %}"><input type="submit" value="New product" id="btn"></a>
+        </div>
+    
+
+    <div class="container" >
+        <form action="search" method="GET" id="filterForm">
+            <div class="mb-3">
+                <label for="name" class="form-label"><b>Filter by:</b></label><br><br>
+    
+                <label for="name" class="form-label">Global Search</label>
+                <input type="text" class="form-control" name="name" id="name">
+    
+                <label for="states" class="form-label mt-3">State</label>
+                <select class="form-select" id="states" name="states">
+                    <option value="all">ALL</option>
+                    <option value="andra pradesh">Andra Pradesh</option>
+                    <option value="arunachal pradesh">Arunachal Pradesh</option>
+                    <option value="assam">Assam</option>
+                    <option value="bihar">Bihar</option>
+                    <option value="chhattisgarh">Chhattisgarh</option>
+                    <option value="goa">Goa</option>
+                    <option value="gujarat">Gujarat</option>
+                    <option value="haryana">Haryana</option>
+                    <option value="himachal pradesh">Himachal Pradesh</option>
+                    <option value="jammu and kashmir">Jammu and Kashmir</option>
+                    <option value="jharkhand">Jharkhand</option>
+                    <option value="karnataka">Karnataka</option>
+                    <option value="kerala">Kerala</option>
+                    <option value="madya pradesh">Madya Pradesh</option>
+                    <option value="maharashtra">Maharashtra</option>
+                    <option value="manipur">Manipur</option>
+                    <option value="meghalaya">Meghalaya</option>
+                    <option value="mizoram">Mizoram</option>
+                    <option value="nagaland">Nagaland</option>
+                    <option value="orissa">Orissa</option>
+                    <option value="punjab">Punjab</option>
+                    <option value="rajasthan">Rajasthan</option>
+                    <option value="sikkim">Sikkim</option>
+                    <option value="tamil nadu">Tamil Nadu</option>
+                    <option value="telangana">Telangana</option>
+                    <option value="tripura">Tripura</option>
+                    <option value="uttaranchal">Uttaranchal</option>
+                    <option value="uttar pradesh">Uttar Pradesh</option>
+                    <option value="west bengal">West Bengal</option>
+                    <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                    <option value="andaman and nicobar islands">Andaman and Nicobar Islands</option>
+                    <option value="chandigarh">Chandigarh</option>
+                    <option value="dadar and nagar haveli">Dadar and Nagar Haveli</option>
+                    <option value="daman and diu">Daman and Diu</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="lakshadeep">Lakshadeep</option>
+                    <option value="pondicherry">Pondicherry</option>
+                        <!-- other options -->
+                </select>
+            </div>
+
+             <div class="mb-3" id="sp">
+                <label for="specializations" class="form-label">Select a specialization:</label>
+                <select class="form-select" id="specializations" name="specializations">
+                    <option value="all">ALL</option>
+                    <option value="anesthesiology">Anesthesiology</option>            
+                    <option value="cardiology">Cardiology</option>
+                    <option value="dermatology">Dermatology</option>
+                    <option value="endocrinology">Endocrinology</option>
+                    <option value="gastroenterology">Gastroenterology</option>
+                    <option value="hematology">Hematology</option>
+                    <option value="infectiousdisease">Infectiousdisease</option>
+                    <option value="neurology">Neurology</option>
+                    <option value="oncology">Oncology</option>
+                    <option value="ophthalmology">Ophthalmology</option>
+                    <option value="orthopedics">Orthopedics</option>
+                    <option value="otolaryngology">Otolaryngology</option>
+                    <option value="pediatrics">Pediatrics</option>
+                    <option value="psychiatry">Psychiatry</option>
+                    <option value="pulmonology">Pulmonology</option>
+                    <option value="radiology">Radiology</option>
+                    <option value="urology">Urology</option>
+                    <option value="rheumatology">Rheumatology</option>
+                    <!-- other options -->
+                </select>
+                <label for="city" class="form-label mt-3">Select a City:</label>
+                <input type="text" class="form-control" name="city" id="city"> 
+             </div>
+
+             <div class="mb-3" id="sts">
+                <label for="status" class="form-label mt-3" >Status</label>
+                <select class="form-select" id="status" name="status">
+                    <option value="all">All</option>
+                    <option value="intrested">Interested</option>
+                    <option value="not intrested">Not intrested</option>
+                    <option value="ringing not respond">Ringing not  responding</option>
+                    <option value="call later">Call later</option>
+    
+                    <!-- other options -->
+                </select>
+            </div>
+            <div class="mb-3" id="btns">
+                <button onclick="filterTable()" type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                <button type="reset" onclick="refreshPage()" class="btn btn-secondary"><i class="fas fa-redo-alt"></i></button>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="tb">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">SI NO.</th>
+                        <th scope="col">Doctor Name</th>
+                        <th>Specialization</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Clinic</th>
+                        <th scope="col">Status</th>
+                        <th class="col-1"><i class="fa-solid fa-trash"></i></th>
+                        <th class="col-1"><i class="fa-regular fa-pen-to-square"></i></th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td scope="row" ><a href="{% url 'edit' id=i.id %}" style="text-decoration: none; font-size: 15px; font-weight: bold; ">{{i.title1}} {{i.name1}}</a></td>
+                        <td scope="row">{{i.specification1}}</td>
+                        <td scope="row">{{i.phone1}}</td>
+                        <td scope="row">{{i.city1}}</td>
+                        <td scope="row">{{i.state1}}</td>
+                        <td scope="row">{{i.clinic1}}</td>
+                        <td scope="row">{{i.status1}}</td>
+                        <td>
+                            <a href="{% url 'delete1' id=i.id %}"> delete</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'update1' id=i.id %}"> edit</a>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+
+    <script>
+         function refreshPage() {
+            location.reload();
+        }
+    </script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+{% endblock %}
+</html>

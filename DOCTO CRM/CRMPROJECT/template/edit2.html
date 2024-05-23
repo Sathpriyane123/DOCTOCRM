@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row">
+        <form action="{% url 'update1' xyz.id %}" method="POST" id="edit">
+          {% csrf_token %}
+          <label for="">title</label><br>
+          <select name="title" id="title" value="{{xyz.title1}}">
+            <option value="dr">Dr</option>
+            <option value="mr">Mr</option>
+            <option value="mrs">Mrs</option>
+            <option value="student">Student</option>
+          </select><br><br>
+          <label for="">Name</label><br>
+          <input type="text" value="{{xyz.name1}}" name="name" id="name" placeholder="Enter name"><br>
+          <label for="">Clinic Name</label><br>
+          <input type="text" value="{{xyz.clinic1}}" name="Clinicname" id="Clinicname" placeholder="Enter Clinic name"><br>
+          <label for="">Email</label><br>
+          <input type="email" value="{{xyz.email1}}" name="email" id="email" placeholder="Enter email"><br>
+          <label for="">Phone1</label><br>
+          <input type="text" value="{{xyz.phone1}}" name="phone1" placeholder="Enter phone number1"><br>
+          <label for="">Specification</label><br>
+          <select class="form-select" value="{{xyz.specification1}}" id="specializations" name="specializations">
+            <option value="SELECT">SELECT</option>
+            <option value="anesthesiology">Anesthesiology</option>                    
+            <option value="cardiology">Cardiology</option>
+            <option value="dermatology">Dermatology</option>
+            <option value="endocrinology">Endocrinology</option>
+            <option value="gastroenterology">Gastroenterology</option>
+            <option value="hematology">Hematology</option>
+            <option value="infectiousdisease">Infectiousdisease</option>
+            <option value="neurology">Neurology</option>
+            <option value="oncology">Oncology</option>
+            <option value="ophthalmology">Ophthalmology</option>
+            <option value="orthopedics">Orthopedics</option>
+            <option value="otolaryngology">Otolaryngology</option>
+            <option value="pediatrics">Pediatrics</option>
+            <option value="psychiatry">Psychiatry</option>
+            <option value="pulmonology">Pulmonology</option>
+            <option value="radiology">Radiology</option>
+            <option value="urology">Urology</option>
+            <option value="rheumatology">Rheumatology</option>
+            <!-- other options -->
+          </select><br>
+          <label for="inputState" class="tx">State</label><br>
+          <select class="" id="inputState" value="{{xyz.state1}}" name="state">
+              <option value="SelectState">Select State</option>
+              <option value="andra pradesh">Andra Pradesh</option>
+              <option value="arunachal pradesh">Arunachal Pradesh</option>
+              <option value="assam">Assam</option>
+              <option value="bihar">Bihar</option>
+              <option value="chhattisgarh">Chhattisgarh</option>
+              <option value="goa">Goa</option>
+              <option value="gujarat">Gujarat</option>
+              <option value="haryana">Haryana</option>
+              <option value="himachal pradesh">Himachal Pradesh</option>
+              <option value="jammu and kashmir">Jammu and Kashmir</option>
+              <option value="jharkhand">Jharkhand</option>
+              <option value="karnataka">Karnataka</option>
+              <option value="kerala">Kerala</option>
+              <option value="madya pradesh">Madya Pradesh</option>
+              <option value="maharashtra">Maharashtra</option>
+              <option value="manipur">Manipur</option>
+              <option value="meghalaya">Meghalaya</option>
+              <option value="mizoram">Mizoram</option>
+              <option value="nagaland">Nagaland</option>
+              <option value="orissa">Orissa</option>
+              <option value="punjab">Punjab</option>
+              <option value="rajasthan">Rajasthan</option>
+              <option value="sikkim">Sikkim</option>
+              <option value="tamil nadu">Tamil Nadu</option>
+              <option value="telangana">Telangana</option>
+              <option value="tripura">Tripura</option>
+              <option value="uttaranchal">Uttaranchal</option>
+              <option value="uttar pradesh">Uttar Pradesh</option>
+              <option value="west bengal">West Bengal</option>
+              <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+              <option value="andaman and nicobar islands">Andaman and Nicobar Islands</option>
+              <option value="chandigarh">Chandigarh</option>
+              <option value="dadar and nagar haveli">Dadar and Nagar Haveli</option>
+              <option value="daman and diu">Daman and Diu</option>
+              <option value="delhi">Delhi</option>
+              <option value="lakshadeep">Lakshadeep</option>
+              <option value="pondicherry">Pondicherry</option>
+          </select><br><br>
+          <label for="inputDistrict" class="txt">city</label><br>
+          <input type="text" value="{{xyz.city1}}" placeholder="enter your city" class="txt" name="city"><br><br>
+          <br>
+          <input type="submit" value="update" class="btn btn-primary">
+          {{keysup}}
+        </form>
+
+
+      </div><br>
+</body>
+</html>

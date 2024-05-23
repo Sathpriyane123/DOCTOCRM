@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>status</title>
+      <!-- Load Bootstrap via CDN -->
+  <link rel="shortcut icon" id="favicon" href="http://doctoscrm.in/uploads/company/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Load jQuery via CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Load Bootstrap JavaScript via CDN -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>   
+
+        /* Styling for the overlay */
+    .overlay {
+        display: none;
+        position:fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+        z-index: 100; /* make sure it's on top of other content */
+    }
+        /* Styling for the popup form */
+    .popup-form {
+        display:none;
+        position:absolute;
+        margin-top: 150px;
+        margin-left: 30px;
+        top: 100%;
+        left: 45%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000; /* make sure it's on top of overlay */
+    }
+    #popupForm2{
+      margin-top:20px;
+      margin-left: -5px;
+    }
+    #popupForm3{
+      margin-top: -280px;
+      margin-left: 30px;
+    }
+    #popupForm4{
+      margin-top: -240px;
+      margin-left: 30px;
+    }
+    #popupForm5{
+      margin-top: -250px;
+      margin-left: 30px;
+    }
+    #popupForm6{
+      margin-top: -170px;
+      margin-left: 30px;
+    }
+    #edit{
+      margin: 10px;
+      margin-left: 30px;
+    }
+    .head{
+      background-color: green;
+      color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    .leftopt{
+      width: 50px;  
+    }
+    .greenbtn{
+        margin: 10px;
+        background: none;
+        border: none;
+        color: rgb(23, 235, 23);
+        font-weight: bolder;
+        font-size: 15px;
+        position: relative;
+        top: 30px;
+    }
+    .bluebtn{
+        margin: 10px;
+        background: none;
+        border: none;
+        color: rgb(14, 83, 195);
+        font-weight: bolder;
+        font-size: 15px;
+        position: relative;
+        top: 30px;
+    }
+    .redbtn{
+        margin: 10px;
+        background: none;
+        border: none;
+        color: red;
+        font-weight: bolder;
+        font-size: 15px;
+        position: relative;
+        top: 30px;
+    }
+    .yellowbtn{
+        margin: 10px;
+        background: none;
+        border: none;
+        color:orange;
+        font-weight: bolder;
+        font-size: 15px;
+        position: relative;
+        top: 30px;
+    }
+    .greenbtn:hover{
+        color: green;
+    }
+    .bluebtn:hover{
+        color: blue;
+    }
+    .yellowbtn:hover{
+        color: rgb(255, 106, 0);
+    }
+    .redbtn:hover{
+        color: darkred;
+    }
+    .row{
+      height: 100%;
+      padding: 20px;
+    }
+    #close{
+      position: relative;
+      float:right;
+      bottom: 25px;
+    }
+    
+</style>
+<body>
+  <div class="container-fluid">
+    <!-- SEARCH AND CALL section -->
+    <div class="row">
+      <div class="col-sm-3 ">
+        <div class="head">
+          <form action="user" method="POST">
+            <h4>Name: {{data.title1}} {{data.name1}}</h4>
+            <label for="">Phone number</label><br>
+            <select name="phone" id="">
+              <option value="{{i.phone1}}">{{data.phone1}}</option>
+            </select><br>
+          </form>
+          <a href="{% url 'update' id=xyz.id}"><button class="bluebtn" style="left: 330px;"><i class="fa-solid fa-pen-to-square" style="color: #f1f3f5;" >Edit</i></button></a>
+
+
+          <a href="{% url 'search' %}"><button class="btn"><i class="fa-solid fa-backward" style="color: #981616;"></i></button></a>
+        </div>
+        <div class="lefopt">
+          <button onclick="togglePopup1(popupForm1)" class="greenbtn" ><i class="fa-solid fa-cart-shopping"></i>Closed</button><br>
+            <div class="popup-form" id="popupForm1">
+              <button onclick="togglePopup1('popupForm1')" class="btn" id="close"><i class="fa-solid fa-xmark" style="color: #e23232;"></i></button>
+              <form action="{% url 'closed' id=data.id %}" method="POST" id="closed">
+                {% csrf_token %}
+                <label for="">Product type</label><br>
+                <select name="producttype" id="producttype">
+                    <option value="select item">select item</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                    <option value="both">BOTH</option>
+                    <option value="digtal marketing + website">Digtal Marketing + website</option>
+                </select>
+                <label for="">Product</label><br>
+                <select name="product" id="product">
+                    <option value="select product">Select product</option>
+                    <option value="doctosmart corporate eye version">Doctosmart Corporate Eye Version</option>
+                    <option value="doctosmart basic plan">Doctosmart Basic Plan</option>
+                    <option value="doctosmart corporate version">Doctosmart Corporate Version</option>
+                    <option value="doctosmart smart package">Doctosmart Smart Package</option>
+                    <option value="software basic">Software Basic</option>
+                </select><br>
+                <label for="">Quantity</label><br>
+                <input type="number" name="quantity" id="quantity" placeholder="quantity"><br><br>
+                <label for="">Price</label><br>
+                <input type="number" name="price" id="price" placeholder="price"><br><br>
+                <label for="">Discount</label><br>
+                <input type="number" name="discount" id="discount" placeholder="Discount"><br><br>
+                <label for="">Offer</label><br>
+                <select name="offer" id="offer">
+                    <option value="select offer">Select offer</option>
+                    <option value="2 month free tab">2 Month Free tab</option>
+                    <option value="free tab">Free tab</option>
+                </select><br><br>
+                <label for="">Installation Date and time</label><br>
+                <input type="datetime-local" name="installationdateandtime" id="installation_date_and_time"><br><br>
+                <label for="">Duration from</label><br>
+                <input type="datetime-local" name="durationfrom" id="duration_from"><br><br>
+                <label for="">Duration to</label><br>
+                <input type="datetime-local" name="durationto" id="duration_to"><br><br>
+                <label for="">Installation type</label><br>
+                <select name="Installationtype" id="Installationtype">
+                    <option value="select type">Select type</option>
+                    <option value="online">Online</option>
+                    <option value="on site">On Site</option>
+                </select><br><br>
+                <label for="">Payment type</label><br>
+                <select name="paymenttype" id="paymenttype">
+                    <option value="select payament">Select Payment</option>
+                    <option value="cash">Cash</option>
+                    <option value="cheque"> Cheque</option>
+                    <option value="cod">COD</option>
+                    <option value="upi">UPI</option>
+                </select><br>
+                <input type="number" name="balance" id="balance" placeholder="balance"><br><br>
+                <label for="">Description</label><br>
+                <textarea name="description" id="description" cols="30" rows="2"></textarea>
+                <br>
+                <input type="submit" value=" save" class="btn" name="submit" style="background-color: blue;color: azure;font-weight: bold; border: 0px;"><br>
+                {{key1}}
+              </form>
+              
+              
+            </div>
+        
+        
+          <button onclick="togglePopup2(popupForm2)" class="bluebtn"><i class="fa-regular fa-newspaper"></i>Interested</button><br>
+            <div class="popup-form" id="popupForm2">
+              <button onclick="togglePopup2('popupForm2')" class="btn" id="close"><i class="fa-solid fa-xmark" style="color: #e23232;"></i></button>
+
+              <form action="{% url 'intrest' id=data.id %}" method="POST" id="intrest">
+                {% csrf_token %}
+                <label for="">Type</label><br>
+                <select name="type" id="type">
+                    <option value="leads">Leads</option>
+                    <option value="follow up">Follow up</option>
+                    <option value="closable">Closable</option>
+                </select><br><br>
+                <label for="">Priority</label><br>
+                <select name="priority" id="priority">
+                    <option value="hot">Hot</option>
+                    <option value="average">Average</option>
+                    <option value="low">Low</option>
+                </select><br><br>
+                <label for="">Demo Date and Time</label><br>
+                <input type="datetime-local" name="demodate_and_time" id="demodate_and_time"><br><br>
+                <label for="">Product type</label><br>
+                <select name="producttype" id="producttype">
+                    <option value="select work">Select work</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                    <option value="both">BOTH</option>
+                    <option value="digital marketing + website">Digital Markecting + website</option>
+                </select><br><br>
+                <label for="">Description</label><br>
+                <textarea name="description" id="description" cols="30" rows="2"></textarea><br><br>
+                <input type="submit" value="save" name="submit" style="background-color: blue;color: azure;font-weight: bold; border: 0px;"><br>
+                {{key2}}
+              </form>
+            </div>
+          
+          <button onclick="togglePopup3(popupForm3)" class="bluebtn"><i class="fa-regular fa-newspaper"></i>Followup</button><br>
+            <div class="popup-form" id="popupForm3">
+              <button onclick="togglePopup3('popupForm3')" class="btn" id="close"><i class="fa-solid fa-xmark" style="color: #e23232;"></i></button>
+              <form action="{% url 'followup' id=data.id %}" method="POST">
+                {% csrf_token %}
+                <label for="">Next followup</label><br>
+                <input type="datetime-local" name="nextfollowup" id="nextfolloup"><br>
+                <label for="">Description</label><br>
+                <textarea name="description" id="description" cols="30" rows="2"></textarea><br>
+                <input type="submit" value="save" name="submit" style="background-color: blue;color: azure;font-weight: bold; border: 0px;"><br>
+                {{key3}}
+              </form>
+            </div>
+
+          <button onclick="togglePopup4(popupForm4)" class="redbtn"><i class="fa-solid fa-phone"></i>Not Interested</button><br>
+            <div class="popup-form" id="popupForm4">
+              <button onclick="togglePopup4('popupForm4')" class="btn" id="close"><i class="fa-solid fa-xmark" style="color: #e23232;"></i></button>
+              <form action="notintrested" method="POST">
+                {% csrf_token %}
+                <label for="">Date time</label><br>
+                <input type="datetime-local" name="datetime" id=""><br><br>
+                <label for="">Reson</label><br>
+                <textarea name="description" id="description" cols="30" rows="2"></textarea><br><br>
+                <input type="submit" value="save" style="background-color: blue;color: azure;font-weight: bold; border: 0px;">
+                {{key4}}
+              </form>
+            </div>
+
+          <button onclick="togglePopup5(popupForm5)" class="redbtn"><i class="fa-solid fa-phone"></i>Ringing Not Response</button><br>
+            <div class="popup-form" id="popupForm5">
+              <button onclick="togglePopup5('popupForm5')" class="btn" id="close"><i class="fa-solid fa-xmark" style="color: #e23232;"></i></button>
+              <form action="rnr" method="POST">
+                {% csrf_token %}
+                <label for="">next calling</label><br>
+                <input type="datetime-local" name="nextcalling" id=""><br>
+                <input type="submit" value="save" style="background-color: blue;color: azure;font-weight: bold; border: 0px;">
+                {{key5}}
+              </form>
+            </div>
+
+          <button onclick="togglePopup6(popupForm6)" class="yellowbtn"><i class="fa-solid fa-phone"></i>Call Later</button><br>
+            <div class="popup-form" id="popupForm6">
+              <button onclick="togglePopup6('popupForm6')" class="btn" id="close"><i class="fa-solid fa-xmark" style="color: #e23232;"></i></button>
+              <form action="calllater" method="POST">
+                {% csrf_token %}
+                <label for="">next calling</label><br>
+                <input type="datetime-local" name="nextcalling" id=""><br>
+                <label for="">Reson</label><br>
+                <textarea name="description" id="" cols="30" rows="2"></textarea><br><br>
+                <input type="submit" value="save" style="background-color: blue;color: azure;font-weight: bold; border: 0px;">
+                {{key6}}
+              </form>
+            </div>
+          <a href="#"><button class="bluebtn" ><i class="fa-solid fa-file-invoice" style="color: #1663e9;"></i>Invoice</button></a>
+        </div>
+      </div>
+
+      <!-- Table section -->
+      <div class="container mt-5">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Entered</th>
+              <th>Status</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in cl %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{i.cdt}}</td>
+              <td>{{data.status1}}</td>
+              <td>{{i.description}}</td>
+              <td></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+<script>
+    // Function to toggle the visibility of the popup and overlay
+    function togglePopup1(popupForm1) {
+        var popup = document.getElementById("popupForm1");
+        var overlay = document.getElementById("overlay");
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        } else {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+    }
+    function togglePopup2(popupForm2) {
+        var popup = document.getElementById("popupForm2");
+        var overlay = document.getElementById("overlay");
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        } else {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+    }
+    function togglePopup3(popupForm3) {
+        var popup = document.getElementById("popupForm3");
+        var overlay = document.getElementById("overlay");
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        } else {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+    }
+    function togglePopup4(popupForm4) {
+        var popup = document.getElementById("popupForm4");
+        var overlay = document.getElementById("overlay");
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        } else {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+    }
+    function togglePopup5(popupForm5) {
+        var popup = document.getElementById("popupForm5");
+        var overlay = document.getElementById("overlay");
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        } else {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+    }
+    function togglePopup6(popupForm6) {
+        var popup = document.getElementById("popupForm6");
+        var overlay = document.getElementById("overlay");
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        } else {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+    }
+    function togglePopup7(popupForm7) {
+        var popup = document.getElementById("popupForm7");
+        var overlay = document.getElementById("overlay");
+        if (popup.style.display === "block") {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        } else {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+    }
+    // this function is used for manual dialer
+
+</script>
+</body>
+</html>
+
+</body>
+</html>

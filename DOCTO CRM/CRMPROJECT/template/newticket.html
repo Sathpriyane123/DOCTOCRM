@@ -1,0 +1,259 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+          <!-- Bootstrap JS -->
+          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+          
+          <!-- TinyMCE JS -->
+          <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    
+</head>
+<style>
+.files{
+    background-color: rgb(34, 173, 50);
+    margin-left:250px;
+    margin-right: 50px;
+    padding-block: 5px;
+}
+body{
+    margin: 30px;
+}
+.btn{
+    background-color: green;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.btn:hover{
+    background-color:  #b3b1b1;
+}
+button[name=save]{
+    background-color: green;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 90px;
+    height: 40px;
+    position: relative;
+    bottom: 60px;
+    
+}
+button[name=save]:hover{
+    background-color:  #b3b1b1;
+}
+
+</style>
+
+<body>
+    <div class="">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div>
+                <!-- <button><i class="fa-solid fa-envelope"></i>&nbsp;Ticket Without Contact</button> -->
+                <a href="{% url 'ticketwithout' %}"><button class="btn"><i class="fa-solid fa-envelope"></i>&nbsp;Ticket Without Contact</button></a>
+
+                </div><br><ul></ul>
+                <form action="tickets" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Subject</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Contact</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input" name="contact">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Name</label>
+                            <input type="text" class="form-control" id="inputEmail4" name="name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Email Address</label>
+                            <input type="text" class="form-control" id="inputPassword4" name="emailaddress">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Department</label>
+                            <select id="inputState" class="form-control" name="department">
+                                <option selected>Nothing Selected</option>
+                                <option>Software Development</option>
+                                <option>Service Department</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">CC</label>
+                            <input type="password" class="form-control" id="inputPassword4" name="cc">
+                        </div>
+
+
+                    </div>
+
+                
+
+            </div>
+
+            <div class="col-md-6">
+                <p><i class="fa-solid fa-tag"></i>&nbsp;Tags</p>
+                <div class="dropdown" >
+                    <select name="tags" id="" class="col-md-4" style="height: 30px;">
+                        <option value="">Tags</option>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                </div><br>
+                
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Assign Ticket(default is current user)</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="assigntickets">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Priority</label>
+                            <select id="inputState" class="form-control" name="priority">
+                                <option selected></option>
+                                <option>Low</option>
+                                <option>Medium</option>
+                                <option>High</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="inputState">Service</label>
+                            <select id="inputState" class="form-control" name="service">
+                                <option selected></option>
+                                <option>Error 404</option>
+                                <option>Password Reset</option>
+                                <option>Time Changing</option>
+                                <option>Dr.Louis</option>
+                                <option>Email ID Changing</option>
+                                <option>Issue In lead Sheet</option>
+                                <option>Errors In Software</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">Ticket Body</h5><br>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <!-- <label for="inputState">State</label> -->
+                <select id="inputState" class="form-control" name="insertpre">
+                    
+                    <option selected>Insert Predefined Reply</option>
+                    <option>Test</option>
+                    <option>Ajeesh Sdf</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <!-- <label for="inputState">State</label> -->
+                <select id="inputState" class="form-control" name="insertkn">
+                    <option selected>Insert Knowledge Base link</option>
+                    <option>Test</option>
+                    <option>Ajeesh Sdf</option>
+                </select>
+
+            </div>
+
+
+
+        </div>
+    </div><br>
+    <div class="container mt-8">
+        <div class="row">
+          <div class="col-md-12 offset-md-0">
+            <!-- WP Editor -->
+            <textarea id="wp-editor" name="textarea"></textarea>
+          </div>
+        </div>
+      </div>
+      
+      
+       
+      
+       <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="ss text-center">
+            <div class="files">
+              <!-- <label for="img1">Attachments</label>
+              <input type="file" id="img1" name="img1"> -->
+              <label style="width: 130px;" for="myfile">Attachments</label>
+              <input style="padding-right:-20px ;" type="file"  name="attachments">
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button name="save" type="submit">Save</button>
+
+
+    </form>
+
+
+
+      <script>
+        // Initialize TinyMCE
+        tinymce.init({
+          selector: '#wp-editor',
+          plugins: 'lists link image imagetools media',
+          toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image media',
+          menubar: false,
+          branding: false
+        });
+      </script>
+
+
+
+
+</body>
+
+</html>

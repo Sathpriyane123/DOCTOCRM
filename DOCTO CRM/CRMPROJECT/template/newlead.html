@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    form{
+        position: relative;
+        padding-inline: 50px;
+        padding-top: 50px;
+    }
+    header{
+        background-color: rgb(58, 67, 244);
+        padding-block: 10px;
+        color: aliceblue;
+    }
+    h4{
+        position: relative;
+        padding-left:15px;
+    }
+    .btn2{
+        background-color: green;
+        color: #fff;
+        border: 0;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-left: 10px;
+        cursor: pointer;
+        width: 80px;
+        height: 40px;
+
+
+    }  
+    .btn1 {
+        background-color: #bdbaba;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-left: 30px;
+        cursor: pointer;
+        width: 80px;
+        height: 40px;
+
+    }    
+    button:hover{
+        box-shadow: 0 0 5px black;
+    }
+    #main{
+        background-color: #bbbcbb;
+        padding: 20px;
+    }   
+    
+</style>
+<body>
+  <div class=" text-white p-3 d-flex justify-content-between align-items-center" id="main">
+    <h2 class="m-0">New Leads</h2>
+    <a href="{% url 'leads' %}"><button class="btn btn-lg">x</button></a>
+</div>
+    <form action="newlead" method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select class="form-control" id="status" name="status">
+                <option value="">Nothing Selected </option>
+                <option value="pending">Pending</option>
+                <option value="follow-up">Follow Up</option>
+                <option value="lead">Lead</option>
+                <option value="closed">Closed</option>
+                <option value="customer">Customer</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="specialisation">Specialisation</label>
+              <select class="form-control" id="specialisation" name="specialisation">
+                <option value="Nothing Selected">Nothing Selected</option>
+                <option value="24 Hour Veterinary Doctor">24 Hour Veterinary Doctor</option>
+                <option value="Acupressure">Acupressure</option>
+                <option value="Acupuncture">Acupuncture</option>
+                <option value="Allopathic">Allopathic</option>
+                <option value="Alcahol Deaddiction Doctor">Alcahol Deaddiction Doctor</option>
+                <option value="Anaesthesia">Anaesthesia</option>
+                <option value="Asthm">Asthma</option>
+                <option value="Ayurveda">Ayurveda</option>
+                <option value="Dental">Dental</option>
+              </select>
+              
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="assigned">Assigned</label>
+              <select class="form-control" id="assigned" name="assigned">
+                <option value="Nothing Selected">Nothing Selected</option>
+                <option value="Adarsh">Adarsh</option>
+                <option value="Shabeer">Shabeer</option>
+                <option value="Shajahan">Shajahan</option>
+                <option value="Vaishak">Vaishak</option>
+                <option value="Sathpriyan">Sathpriyan</option>
+              </select>
+              
+            </div>
+          </div>
+        </div><hr>
+        <div class="form-group">
+          <label for="tag"><i class="fa-solid fa-tag"></i>Tags</label>
+          <select class="form-control" id="tags" name="tags" style="border: 0px;">
+            <option>Nothing Selected</option>
+            <option>Offline</option>
+            <option>Online</option>
+          </select>
+        </div><hr>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="position">Position</label>
+              <input type="text" class="form-control" id="position" placeholder="Position" name="position">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" class="form-control" id="email" placeholder="Email Address" name="emailaddress">
+            </div>
+            <div class="form-group">
+              <label for="website">Website</label>
+              <input type="url" class="form-control" id="website" placeholder="Website" name="website">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="phone" class="form-control" id="phone" placeholder="Phone" name="phone">
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" class="form-control" id="company" placeholder="Company" name="company">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="address">Address</label>
+              <textarea type="text" class="form-control" id="address" name="address" placeholder="Address" cols="30" rows="1"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" class="form-control" id="city" placeholder="City" name="city">
+            </div>
+            <div class="form-group">
+              <label for="state">State</label>
+              <input type="text" class="form-control" id="state" name="state" placeholder="State">
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select class="form-control" id="country" name="country">
+                  <option>Nothing selected</option>
+                  <option>America</option>
+                  <option>Australia</option>
+                  <option>China</option>
+                  <option>Canada</option>
+                  <option>Europe</option>
+                  <option>Ireland</option>
+                  <option>India</option>
+                  <option>Indonasia</option>
+                  <option>Japan</option>
+                  <option>Srilanka</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="zip">Zip Code</label>
+              <input type="text" class="form-control" id="zip" name="zipcode" placeholder="Zip Code">
+            </div>
+            <div class="form-group">
+              <label for="language">Default Language</label>
+              <select class="form-control" id="language" name="language">
+                <option>System Default</option>
+                <option>English</option>
+                <option>Hindi</option>
+                <option>Malayalam</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea type="text" class="form-control" id="description" name="discription" placeholder="Description" cols="100" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <div class="btn-group btn-group-toggle" data-toggle="radio">
+                
+                <p>  <input type="radio" name="public">Public               
+                  <input type="radio" name="public">Contactedtoday
+                </p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="priority">Priority</label>
+              <select class="form-control" id="priority" name="priority">
+                <option>Nothing selected</option>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="remarks">Remarks</label>
+              <textarea type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks" cols="100" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn1" id="btnclose">Close</button>
+              <button type="submit" class="btn2" id="btnsave">Save</button>
+            </div>
+         
+          
+      </form>
+      
+    
+    
+    
+</body>
+</html>

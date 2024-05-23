@@ -1,0 +1,246 @@
+
+{% extends "head.html" %}
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user.css' %}">
+    <link rel="shortcut icon" id="favicon" href="http://doctoscrm.in/uploads/company/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var excludeInactiveCheckbox = document.getElementById('excludeInactive');
+    
+            if (excludeInactiveCheckbox) {
+                excludeInactiveCheckbox.addEventListener('change', function () {
+                    document.getElementById('filterForm').submit();
+                });
+            }
+        });
+    </script>
+</head>
+<style>
+.page{
+    position: relative;
+    text-align: right;
+    margin-right: 25px;
+    margin-top: 20px;
+}
+.activity{
+    text-align: center;
+    position: relative;
+    left: 1150px;
+    top: 30px;
+ 
+}
+
+
+p{
+    text-align: left;
+    font-size: 25px;
+    margin-block-start: 13px;
+    margin-block-end: -5px;
+}
+h2{
+    font-size: small
+}
+.Summary{
+    margin-left: 10px;
+    display: flex;
+    border-spacing: 25px;
+}
+.row{
+    display: table-row;
+}
+.cell{
+    display: table-cell;
+    box-shadow: 3px 4px 3px 0px gainsboro;
+    width: 100px;
+    height: 90px;
+    padding: 0px 1px 3px 11px;
+}
+h1 {
+    margin-left: 35px;
+    margin-top: 55px;
+    margin-block-end: -10px;
+    font-size: larger;
+}
+h3{
+    margin-left: 35px;
+    margin-top: 46px;
+    font-size: large;    
+    margin-block-start: 20px;
+}
+select{
+    margin-left: 40px;
+    padding-block: 3px;
+}
+table, tr, td{
+    border: 2px solid gainsboro;
+    border-collapse: collapse;
+    margin-left: 40px;
+    margin-top: 25px;
+    padding: 40px;
+    width: fit-content;
+}
+.reset, .export{
+    background-color: white;
+    border-width: 1px;
+    padding-block: 3px;
+}
+.search{
+    background-color: white;
+    border-width: 1px;
+   
+    
+}
+.div_search{
+    text-align: right;
+    margin-right: 80px;
+    top: -20px;
+    
+}
+.searchbar{
+    position: relative;
+    left: 5px;
+    width: 200px;
+    
+    
+   
+}
+.page{
+    position: relative;
+    text-align: right;
+    margin-right: 80px;
+    margin-top: 20px;
+}
+.prev{
+    background-color: white;
+    border-width: 1px;
+    padding-block: 3px;
+}
+.one{
+    background-color: white;
+    border-width: 1px;
+    padding-block: 3px;
+}
+.next{
+    background-color: white;
+    border-width: 1px;
+    padding-block: 3px;
+}
+
+
+/*  */
+</style>
+<body>
+    <form action="customers" id="filterForm">
+        {% csrf_token %}
+        <h1>Customers Summary</h1>
+        <div class="Summary">
+            <div class="row">
+                <div class="cell">
+                    <p>{{ total_users }}</p>
+                    <h2>Total Customers</h2> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <p>{{ active_users }}</p>
+                    <h2 style="color: blue;">Active Customers</h2>
+                </div>          
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <p>{{ inactive_users }}</p>
+                    <h2 style="color: red;">Inactive Customers</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <p>20</p>
+                    <h2 style="color: rgb(9, 167, 9);">Active Contacts</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <p>10</p>
+                    <h2 style="color: crimson;">Inactive Contacts</h2>
+                </div>           
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <p>0</p>
+                    <h2 style="color: gray;">Contacts Logged In Today</h2> 
+                </div>            
+            </div>
+        </div>
+        <h3><input type="checkbox" name="exclude_inactive" id="excludeInactive" {% if request.GET.exclude_inactive %}checked{% endif %}>Exclude Inactive Customers</h3><br>
+        <select name="users_per_page">
+            <option value="10" {% if request.GET.users_per_page == '10' %}selected{% endif %}>10</option>
+            <option value="25" {% if request.GET.users_per_page == '25' %}selected{% endif %}>25</option>
+            <option value="50" {% if request.GET.users_per_page == '50' %}selected{% endif %}>50</option>
+            <option value="100" {% if request.GET.users_per_page == '100' %}selected{% endif %}>100</option>
+            <option value="all" {% if request.GET.users_per_page == 'all' %}selected{% endif %}>All</option>
+        </select>    
+        <button type="button" class="export">Export</button>
+        <button type="reset" class="reset"><i class="fa-solid fa-rotate"></i></button>
+        <select name="activity_filter" class="activity">
+            <option value="all" {% if request.GET.activity_filter == 'all' %}selected{% endif %}>Active Customers</option>
+            <option value="monthly" {% if request.GET.activity_filter == 'monthly' %}selected{% endif %}>Monthly Active</option>
+            <option value="weekly" {% if request.GET.activity_filter == 'weekly' %}selected{% endif %}>Weekly Active</option>
+            <option value="yearly" {% if request.GET.activity_filter == 'yearly' %}selected{% endif %}>Yearly Active</option>
+        </select>
+        <div class="div_search">
+            <input type="text" placeholder="Search" class="searchbar">
+            <button type="submit" class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="listtable">
+            <table id="table">
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td>#</td>
+                    <td>Clinic</td>
+                    <td>Product Type</td>
+                    <td>Product Name</td>
+                    <td>Executive Name</td>
+                    <td>Bill Amount</td>
+                    <td>Paid Amount</td>
+                    <td>Balance Amount</td>
+                    <td>Primary Email</td>
+                    <td>Phone</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="" id=""></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+{% endblock %}
+
+</html>

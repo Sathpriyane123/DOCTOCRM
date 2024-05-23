@@ -1,0 +1,199 @@
+{% extends "head.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search doctors</title>
+    <link rel="shortcut icon" id="favicon" href="http://doctoscrm.in/uploads/company/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+
+        .head{
+            height: 30px;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            color: #fff;
+            font-family: 'Times New Roman', Times, serif;
+            padding-inline: 5px;
+            
+        }
+        .header{
+            background-color: #44569c;
+            height: 63px;
+        }
+        .container{
+            height: 250px;
+            width: 100%;
+            margin: 30px;
+            padding: auto;
+        }
+        .mb-3{
+            width: 300px;
+            margin-left: 20px;
+            margin-left: 20px;
+            float: left;
+        }
+        #sp{
+            float: left;
+            margin-top: 58px;
+        }
+        #sts{
+            margin-top: 42px;
+
+        }
+        #btns{
+            margin-top: 170px;
+            margin-left: -250px;
+        }
+        #btn{
+            background-color: green;
+            color: #fff;
+            border: 0;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            margin-left: 10px;
+            cursor: pointer;
+            margin-top: 20px;  
+        }
+        #btn:hover{
+            background-color:  #b3b1b1;
+            box-shadow: 0 0 5px black;
+            color: black;
+        }
+        .btn{
+            margin: 10px;
+            border: none;
+            
+        }
+        .btn input{
+            width: 130px;
+            height: 40px;
+        }
+        .tb{
+            position: relative;
+            padding-inline: 20px;
+        }
+        #reset{
+            position: relative;
+            left: 350px;
+            bottom: 45px;
+        }
+    </style>
+</head>
+<body>
+
+  
+        <div class="btn">
+            <a href="{% url 'newlead' %}"><input type="submit" value="New Lead" id="btn"></a>
+        </div>
+    <hr>
+    <div class="container" >
+        <h4>Lead Search</h4><br>
+        <label for="name" class="form-label"><b>Filter by:</b></label><br><br>
+        <form action="search" method="GET" id="filterForm">
+            <div class="mb-3">      
+                <select class="form-select" id="states" name="states">
+                    <option value="all">Assigned</option>
+                </select>
+                <input type="text" class="form-control" name="fdate" placeholder="From date">
+            </div>
+            <div class="mb-3">
+                <select class="form-select" id="status" name="status">
+                    <option value="all">Status</option>
+                    <option value="intrested">Interested</option>
+                    <option value="not intrested">Not intrested</option>
+                    <option value="ringing not respond">Ringing not  responding</option>
+                    <option value="call later">Call later</option>
+                </select>
+                <input type="text" class="form-control" name="tdate" placeholder="To date">
+            </div>
+            <div class="mb-3">
+                <select class="form-select" id="specializations" name="specializations">
+                    <option value="all">Specialization</option>
+                    <option value="anesthesiology">Anesthesiology</option>
+                    <option value="anesthesiology">Anesthesiology</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="dermatology">Dermatology</option>
+                    <option value="endocrinology">Endocrinology</option>
+                    <option value="gastroenterology">Gastroenterology</option>
+                    <option value="hematology">Hematology</option>
+                    <option value="infectiousdisease">Infectiousdisease</option>
+                    <option value="neurology">Neurology</option>
+                    <option value="oncology">Oncology</option>
+                    <option value="ophthalmology">Ophthalmology</option>
+                    <option value="orthopedics">Orthopedics</option>
+                    <option value="otolaryngology">Otolaryngology</option>
+                    <option value="pediatrics">Pediatrics</option>
+                    <option value="psychiatry">Psychiatry</option>
+                    <option value="pulmonology">Pulmonology</option>
+                    <option value="radiology">Radiology</option>
+                    <option value="urology">Urology</option>
+                    <option value="rheumatology">Rheumatology</option>
+                </select>
+                <input type="text" class="form-control" name="phone" placeholder="Phone number">
+             </div>
+             <div class="mb-3">
+                <select class="form-select" id="states" name="states">
+                    <option value="all">Additional Filters</option>
+                </select>
+                <input type="text" class="form-control" name="city" placeholder="City">
+                <button type="reset" onclick="refreshPage()" class="btn btn-secondary" id="reset"><i class="fas fa-redo-alt"></i></button>
+             </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="tb">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" name="selectItem"></th>
+                    <th>Sl No</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Assigned</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in we %}
+                <tr>
+                    <th><input type="checkbox" name="selectItem"></th>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.Name}}</td>
+                    <td>{{i.Company}}</td>
+                    <td>{{i.Emailaddress}}</td>
+                    <td>{{i.Phone}}</td>
+                    <td>{{i.Assigned}}</td>
+                    <td>{{i.Status}}</td>
+                    <td>{{i.Priority}}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+         function refreshPage() {
+            location.reload();
+        }
+    </script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+{% endblock %}
+</html>
