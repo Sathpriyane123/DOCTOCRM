@@ -41,8 +41,8 @@ Docoto Customer Relationship Software is a web-based application designed to hel
 ### Setup Instructions
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-repo/docoto-crm-software.git
-   cd docoto-crm-software
+   git clone https://github.com/Sathpriyane123/DOCTOCRM.git
+   cd DOCTOCRM
    ```
 
 2. **Set up a virtual environment:**
